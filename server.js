@@ -22,7 +22,7 @@ mongoose
 
     //Use Routes
     //app.use('/API/items', items);
-    app.use('/API/order', orders);
+    app.use('/API/items', items);
 
     const port = process.env.PORT || 5000;
 
