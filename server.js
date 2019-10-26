@@ -1,29 +1,37 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const path = require('path');
+const config = require('config');
 
-const items = require('./routes/API/items');
-const orders = require('./routes/API/order');
+//passed as an argument
+//const items = require('./routes/API/items');
+//const orders = require('./routes/API/order');
 
 const app = express();
 
 // Bodyparser Middleware
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 // DB configuration
-const db = require('./config/keys').mongoURI;
+const db = config.get('mongoURI');
 
 // Connecto to DB
 mongoose
-    .connect(db)
+    .connect(db, {
+        useNewUrlParser: true,
+        useCreateIndex: true
+    })
     .then(() => console.log('DB Connected'))
     .catch(err => console.log('err'));
 
     //Use Routes
-    //app.use('/API/items', items);
-    app.use('/API/items', items);
+    //items route
+    app.use('/API/items', require('./routes/API/items'));
+    //users route
+    app.use('/API/Users', require('./routes/API/users'));
+    //Auth route
+    app.use('/API/auth', require('./routes/API/auth'));
 
     //Attend to server when in production
     if(process.env.NODE_ENV === 'production') {
