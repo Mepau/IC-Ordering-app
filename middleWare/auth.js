@@ -5,7 +5,7 @@ function auth(req, res, next) {
     const token = req.header('x-auth-token');
 
     //Check for token
-    if(!token) res.status(401).json({ msg: 'Access denied'});
+    if(!token) return res.status(401).json({ msg: 'Access denied'});
 
     try{
         //Verify token
@@ -14,7 +14,7 @@ function auth(req, res, next) {
         req.user = decoded;
         next();
     }catch(e){
-        res.status(400).json ({ msg: 'Not valid token'});
+        res.status(400).json({ msg: 'Not valid token'});
     }
         
     
