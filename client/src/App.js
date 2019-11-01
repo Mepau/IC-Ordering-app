@@ -14,6 +14,7 @@ import "./App.css";
 class App extends Component {
   componentDidMount() {
     store.dispatch(loadUser());
+    const { user } = {};
   }
 
   render() {
@@ -22,8 +23,8 @@ class App extends Component {
         <div className="App">
           <AppNavbar />
           <Container>
-            <ItemModal />
             <ShopList />
+            <ItemModal />
           </Container>
         </div>
       </Provider>

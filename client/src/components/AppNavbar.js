@@ -61,9 +61,9 @@ class AppNavbar extends Component {
 
     return (
       <div>
-        <Navbar color="dark" dark expand="sm" className="mb-5">
+        <Navbar color="dark" expand="sm" className="mb-5">
           <Container>
-            <NavbarBrand href="/"> List </NavbarBrand>
+            <NavbarBrand href="/"> RANTIC ICE CREAM LIST </NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>

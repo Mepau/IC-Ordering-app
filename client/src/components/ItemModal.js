@@ -1,90 +1,93 @@
-import React, { Component}  from 'react';
+import React, { Component } from "react";
 import {
-    Button,
-    Modal,
-    ModalHeader,
-    ModalBody,
-    Form,
-    FormGroup,
-    Label,
-    Input
-} from 'reactstrap';
-import { connect } from 'react-redux';
-import { addOrderpack } from '../actions/orderpackActions';
-
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  Form,
+  FormGroup,
+  Label,
+  Input
+} from "reactstrap";
+import { connect } from "react-redux";
+import { addOrderpack } from "../actions/orderpackActions";
 
 class ItemModal extends Component {
-    state = {
-        modal: false,
-        name: ''
+  state = {
+    modal: false,
+    name: "",
+    user: ""
+  };
+
+  toggle = () => {
+    this.setState({
+      modal: !this.state.modal
+    });
+  };
+
+  onChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+
+    const newOrderpack = {
+      name: this.state.name
+      //user: user.name
     };
 
-    toggle = () => {
-        this.setState({
-            modal: !this.state.modal
-        });
-    };
+    // Use addOrderpack action for redux
+    this.props.addOrderpack(newOrderpack);
 
-    onChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
-    };
+    // Close modal
+    this.toggle();
+  };
 
-    onSubmit = (e) => {
-        e.preventDefault();
+  render() {
+    return (
+      <div>
+        <Button
+          color="dark"
+          style={{ marginBottom: "2rem" }}
+          onClick={this.toggle}
+        >
+          Add Orderpack
+        </Button>
 
+        <Modal isOpen={this.state.modal} toggle={this.toggle}>
+          <ModalHeader toggle={this.toggle}>Add an order.</ModalHeader>
 
-        const newOrderpack = {
-            name: this.state.name
-        };
-
-        // Use addOrderpack action for redux
-        this.props.addOrderpack(newOrderpack);
-
-        // Close modal
-        this.toggle();
-    }
-
-    render () {
-        return (
-            <div>
-                <Button color="dark"
-                        style={{marginBottom: '2rem'}}
-                        onClick= {this.toggle}>
-                Add Orderpack
+          <ModalBody>
+            <Form onSubmit={this.onSubmit}>
+              <FormGroup>
+                <Label for="orderpack">Orderpacks</Label>
+                <Input
+                  type="text"
+                  name="name"
+                  id="orderpack"
+                  placeholder="Add orderpack"
+                  onChange={this.onChange}
+                />
+                <Button color="dark" style={{ marginTop: "2rem" }} block>
+                  Add order
                 </Button>
-
-                <Modal isOpen={this.state.modal}
-                        toggle ={this.toggle}>
-                        
-                        <ModalHeader toggle={this.toggle}>
-                            Add to List.
-                        </ModalHeader>
-
-                        <ModalBody>
-                            <Form onSubmit ={this.onSubmit}>
-                                <FormGroup>
-                                    <Label for="orderpack">Orderpacks</Label>
-                                    <Input type ="text"
-                                            name ="name"
-                                            id="orderpack"
-                                            placeholder="Add orderpack"
-                                            onChange={this.onChange}/>
-                                    <Button color="dark"
-                                            style ={{marginTop: '2rem'}}
-                                            block>
-                                        Add order
-                                        </Button>
-                                </FormGroup>
-                            </Form>
-                        </ModalBody>
-                </Modal>
-            </div>
-        );
-    }
+              </FormGroup>
+            </Form>
+          </ModalBody>
+        </Modal>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = state => ({
-    orderpack: state.orderpack
-})
+  orderpack: state.orderpack
+});
 
-export default connect(mapStateToProps, {addOrderpack})(ItemModal);
+export default connect(
+  mapStateToProps,
+  { addOrderpack }
+)(ItemModal);
