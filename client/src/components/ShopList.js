@@ -31,7 +31,7 @@ class ShopList extends Component {
                   >
                     &times;
                   </Button>
-                  {name} {user}
+                  {name} Created by: {user}
                 </ListGroupItem>
               </CSSTransition>
             ))}

@@ -35,8 +35,8 @@ class ItemModal extends Component {
     e.preventDefault();
 
     const newOrderpack = {
-      name: this.state.name
-      //user: user.name
+      name: this.state.name,
+      user: this.props.auth.user.name
     };
 
     // Use addOrderpack action for redux
@@ -84,7 +84,8 @@ class ItemModal extends Component {
 }
 
 const mapStateToProps = state => ({
-  orderpack: state.orderpack
+  orderpack: state.orderpack,
+  auth: state.auth
 });
 
 export default connect(
