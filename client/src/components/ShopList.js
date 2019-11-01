@@ -2,27 +2,27 @@ import React, { Component } from 'react';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
-import { getItems, deleteItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
+import { getOrderpacks, deleteOrderpack } from '../actions/orderpackActions';
 
 class ShopList extends Component {
     
     componentDidMount() {
-            this.props.getItems();
+            this.props.getOrderpacks();
         }
 
     deleteOnClick = (id) => {
-        this.props.deleteItem(id);
+        this.props.deleteOrderpack(id);
     }
 
     render () {
-        const { items } = this.props.item;
+        const { orderpacks } = this.props.orderpack;
         return(
             <Container> 
 
                     <ListGroup >
                         <TransitionGroup className="shop-list">
-                            {items.map(({ _id, name }) => (
+                            { orderpacks.map(({_id,name}) => (
                                 <CSSTransition key={_id} timeout ={500} classNames="fade">
                                     <ListGroupItem >
                                         <Button className="remove-btn"
@@ -42,12 +42,14 @@ class ShopList extends Component {
 }
 
 ShopList.propTypes = {
-    getItems: PropTypes.func.isRequired,
-    item: PropTypes.object.isRequired
+
+    getOrderpacks: PropTypes.func.isRequired,
+    orderpack: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
-    item: state.item
+    
+    orderpack: state.orderpack
 });
 
-export default connect(mapStateToProps, { getItems, deleteItem })(ShopList);
+export default connect(mapStateToProps, { getOrderpacks, deleteOrderpack })(ShopList);

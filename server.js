@@ -4,7 +4,7 @@ const path = require('path');
 const config = require('config');
 
 //passed as an argument
-//const items = require('./routes/API/items');
+//const orderpacks = require('./routes/API/orderpacks');
 //const orders = require('./routes/API/order');
 
 const app = express();
@@ -26,8 +26,8 @@ mongoose
     .catch(err => console.log('err'));
 
     //Use Routes
-    //items route
-    app.use('/API/items', require('./routes/API/items'));
+    //orderpacks route
+    app.use('/API/orderpacks', require('./routes/API/orderpacks'));
     //users route
     app.use('/API/Users', require('./routes/API/users'));
     //Auth route

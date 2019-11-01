@@ -1,30 +1,30 @@
- import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from '../actions/types';
+import { GET_ORDERPACKS, ADD_ORDERPACK, DELETE_ORDERPACK, ORDERPACKS_LOADING } from '../actions/types';
 
 const initialState = {
-    items: [],
+    orderpacks: [],
     loading: false
 };
 
 export default function(state = initialState, action) {
     switch(action.type) {
-        case GET_ITEMS:
+        case GET_ORDERPACKS:
             return {
                 ...state,
-                items: action.payload,
+                orderpacks: action.payload,
                 loading: false
             };
-        case DELETE_ITEM:
+        case DELETE_ORDERPACK:
             return {
                     ...state,
-                    items: state.items.filter(item => item._id !== action.payload)
+                    orderpacks: state.orderpacks.filter(orderpack => orderpack._id !== action.payload)
                 };
 
-        case ADD_ITEM:
+        case ADD_ORDERPACK:
             return {
                     ...state,
-                    items: [action.payload, ...state.items]
+                    orderpacks: [action.payload, ...state.orderpacks]
                 };
-        case ITEMS_LOADING:
+        case ORDERPACKS_LOADING:
             return {
                     ...state,
                     loading: true

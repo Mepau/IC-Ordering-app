@@ -3,28 +3,28 @@ const router = express.Router();
 
 const auth = require('../../middleWare/auth');
 
-// Item Model
-const item = require('../../models/item');
+// Orderpack Model
+const orderpack = require('../../models/orderpack');
 
 // GET all items, public access
 router.get('/', (req, res) => {
-    item.find()
+    orderpack.find()
         //.sort({ date: -1})
-        .then(items => res.json(items))
+        .then(orderpacks => res.json(orderpacks))
 });
 
 // POST create item, private access
 router.post('/', auth, (req, res) => {
-    const newItem = new item({
+    const newOrderPack = new orderpack({
         name: req.body.name
     });
-        newItem.save().then(item => res.json(item));
+        newOrderPack.save().then(orderpack => res.json(orderpack));
 });
 
 // DEL item, private access
 router.delete('/:id', auth, (req, res) => {
-    item.findById(req.params.id)
-        .then(item => item.remove()
+    orderpack.findById(req.params.id)
+        .then(orderpack => orderpack.remove()
                           .then(() => res.json('Done')))
         .catch(err => res.status(404).json({success: false}));
 });

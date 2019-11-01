@@ -10,7 +10,8 @@ import {
     Input
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { addItem } from '../actions/itemActions';
+import { addOrderpack } from '../actions/orderpackActions';
+
 
 class ItemModal extends Component {
     state = {
@@ -31,12 +32,13 @@ class ItemModal extends Component {
     onSubmit = (e) => {
         e.preventDefault();
 
-        const newItem = {
+
+        const newOrderpack = {
             name: this.state.name
         };
 
-        // Use addItem action for redux
-        this.props.addItem(newItem);
+        // Use addOrderpack action for redux
+        this.props.addOrderpack(newOrderpack);
 
         // Close modal
         this.toggle();
@@ -48,7 +50,7 @@ class ItemModal extends Component {
                 <Button color="dark"
                         style={{marginBottom: '2rem'}}
                         onClick= {this.toggle}>
-                Add Item
+                Add Orderpack
                 </Button>
 
                 <Modal isOpen={this.state.modal}
@@ -61,16 +63,16 @@ class ItemModal extends Component {
                         <ModalBody>
                             <Form onSubmit ={this.onSubmit}>
                                 <FormGroup>
-                                    <Label for="item">Item</Label>
+                                    <Label for="orderpack">Orderpacks</Label>
                                     <Input type ="text"
                                             name ="name"
-                                            id="item"
-                                            placeholder="Add item"
+                                            id="orderpack"
+                                            placeholder="Add orderpack"
                                             onChange={this.onChange}/>
                                     <Button color="dark"
                                             style ={{marginTop: '2rem'}}
                                             block>
-                                        Add item
+                                        Add order
                                         </Button>
                                 </FormGroup>
                             </Form>
@@ -82,7 +84,7 @@ class ItemModal extends Component {
 }
 
 const mapStateToProps = state => ({
-    item: state.item
+    orderpack: state.orderpack
 })
 
-export default connect(mapStateToProps, { addItem})(ItemModal);
+export default connect(mapStateToProps, {addOrderpack})(ItemModal);
