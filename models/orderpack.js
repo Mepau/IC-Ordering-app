@@ -11,7 +11,7 @@ const orderpackSchema = Schema({
     type: Date,
     default: Date.now
   },
-  user: {
+  username: {
     type: String,
     default: ""
   }

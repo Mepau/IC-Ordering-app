@@ -20,7 +20,7 @@ class ShopList extends Component {
       <Container>
         <ListGroup>
           <TransitionGroup className="shop-list">
-            {orderpacks.map(({ _id, name, user }) => (
+            {orderpacks.map(({ _id, name, username }) => (
               <CSSTransition key={_id} timeout={500} classNames="fade">
                 <ListGroupItem>
                   <Button
@@ -31,7 +31,7 @@ class ShopList extends Component {
                   >
                     &times;
                   </Button>
-                  {name} Created by: {user}
+                  {name} Created by: {username}
                 </ListGroupItem>
               </CSSTransition>
             ))}

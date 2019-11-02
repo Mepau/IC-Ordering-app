@@ -16,7 +16,7 @@ class ItemModal extends Component {
   state = {
     modal: false,
     name: "",
-    user: ""
+    username: ""
   };
 
   toggle = () => {
@@ -36,7 +36,7 @@ class ItemModal extends Component {
 
     const newOrderpack = {
       name: this.state.name,
-      user: this.props.auth.user.name
+      username: this.props.auth.user.name
     };
 
     // Use addOrderpack action for redux
