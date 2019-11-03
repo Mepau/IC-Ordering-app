@@ -18,7 +18,8 @@ router.get("/", (req, res) => {
 router.post("/", auth, (req, res) => {
   const newOrderPack = new orderpack({
     name: req.body.name,
-    username: req.body.username
+    username: req.body.username,
+    expdate: req.body.expdate
   });
   newOrderPack.save().then(orderpack => res.json(orderpack));
 });

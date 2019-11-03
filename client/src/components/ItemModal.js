@@ -11,12 +11,14 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import { addOrderpack } from "../actions/orderpackActions";
+import ReactTimeSelection from "react-time-selection";
 
 class ItemModal extends Component {
   state = {
     modal: false,
     name: "",
-    username: ""
+    username: "",
+    expdate: ""
   };
 
   toggle = () => {
@@ -27,7 +29,8 @@ class ItemModal extends Component {
 
   onChange = e => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
+      [e.target.expdate]: e.target.value
     });
   };
 
@@ -36,7 +39,8 @@ class ItemModal extends Component {
 
     const newOrderpack = {
       name: this.state.name,
-      username: this.props.auth.user.name
+      username: this.props.auth.user.name,
+      expdate: this.state.expdate
     };
 
     // Use addOrderpack action for redux
@@ -69,6 +73,11 @@ class ItemModal extends Component {
                   name="name"
                   id="orderpack"
                   placeholder="Add orderpack"
+                  onChange={this.onChange}
+                />
+                <Label for="expdate">Expires in: </Label>
+                <ReactTimeSelection
+                  placeholder="Expiration hour"
                   onChange={this.onChange}
                 />
                 <Button color="dark" style={{ marginTop: "2rem" }} block>

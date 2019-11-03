@@ -14,6 +14,10 @@ const orderpackSchema = Schema({
   username: {
     type: String,
     default: ""
+  },
+  expdate: {
+    type: String,
+    default: ""
   }
 });
 
